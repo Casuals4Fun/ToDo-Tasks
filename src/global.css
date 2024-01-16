@@ -6,6 +6,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html,
+body {
+  overscroll-behavior: contain;
+}
+
 body {
   font-family: 'Inter', sans-serif;
 }
@@ -25,18 +30,18 @@ button {
 }
 
 .task__container {
-  max-width: 900px;
+  max-width: 600px;
   width: 100%;
   margin: 0 auto;
 }
 
-@media screen and (max-width: 999px) {
+@media screen and (max-width: 699px) {
   .task__container {
     padding: 0 10px;
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 700px) {
   .task__container {
     padding-top: 50px;
   }

@@ -135,8 +135,10 @@
 }
 
 .tasks__container {
-    padding-bottom: 60px;
-    display: grid;
+    padding-bottom: 125px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .task__card {
@@ -196,26 +198,15 @@
     color: white;
 }
 
-@media screen and (min-width: 801px) {
-    .tasks__container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-}
-
-@media screen and (max-width: 999px) {
+@media screen and (max-width: 699px) {
 
     .task__btn.filter,
     .select__filter__top {
         display: none;
     }
-
-    .tasks__container {
-        gap: 20px;
-    }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 700px) {
     #all__task {
         top: 50px;
     }
@@ -223,5 +214,9 @@
     .filter__btn,
     .filter__btn.active {
         display: none;
+    }
+
+    .tasks__container {
+        padding-bottom: 20px;
     }
 }

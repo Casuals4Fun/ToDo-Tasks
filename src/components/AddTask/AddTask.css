@@ -10,7 +10,7 @@
   place-items: center;
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 700px) {
   #add_task {
     top: 50px;
   }

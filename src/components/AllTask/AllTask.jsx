@@ -1,6 +1,8 @@
 import './AllTask.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleFilter, toggleAddTaskModal, toggleFilter } from '../../state/taskReducer';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { setTasks } from '../../state/taskReducer';
 import { FaFilter } from 'react-icons/fa';
 import { IoMdClose } from "react-icons/io";
 import Card from './Card';
@@ -15,29 +17,48 @@ const AllTask = () => {
 }
 
 const Tasks = () => {
-    const { filter } = useSelector(state => state.tasks);
+    const { filter, tasks } = useSelector(state => state.tasks);
+    const dispatch = useDispatch();
 
-    const tasks = [
-        { id: 1, text: 'This is first task.', status: 'Complete' },
-        { id: 2, text: 'This is second task. This is second task. This is second task. This is second task.', status: 'Complete' },
-        { id: 3, text: 'This is third task.', status: 'Incomplete' },
-        { id: 4, text: 'This is fourth task.', status: 'Incomplete' },
-        { id: 5, text: 'This is fifth task.', status: 'Complete' },
-        { id: 6, text: 'This is sixth task.', status: 'Incomplete' },
-        { id: 7, text: 'This is seventh task.', status: 'Complete' },
-        { id: 8, text: 'This is eigth task.', status: 'Incomplete' },
-        { id: 9, text: 'This is ninth task.', status: 'Complete' },
-        { id: 10, text: 'This is tenth task.', status: 'Incomplete' }
-    ];
+    const onDragEnd = (result) => {
+        const { source, destination } = result;
+        if (!destination) {
+            return;
+        }
+
+        const sourceIndex = tasks.length - 1 - source.index;
+        const destinationIndex = tasks.length - 1 - destination.index;
+
+        if (sourceIndex !== destinationIndex) {
+            const newTasks = Array.from(tasks);
+            const [removed] = newTasks.splice(sourceIndex, 1);
+            newTasks.splice(destinationIndex, 0, removed);
+            dispatch(setTasks(newTasks));
+            localStorage.setItem('tasks', JSON.stringify(newTasks));
+        }
+    };
+    const reversedTasks = [...tasks].reverse();
 
     return (
-        <div className='tasks__container' style={{ paddingTop: !filter && "10px" }}>
-            {tasks.reverse().map((task, index) => (
-                <Card task={task} key={task.id} />
-            ))}
-        </div>
-    )
-}
+        <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="tasks">
+                {(provided, snapshot) => (
+                    <div
+                        className='tasks__container'
+                        style={{ paddingTop: !filter && "10px" }}
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                    >
+                        {reversedTasks.map((task, index) => (
+                            <Card task={task} index={index} key={task.id} />
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
+        </DragDropContext>
+    );
+};
 
 const TaskHeader = () => {
     const dispatch = useDispatch();
