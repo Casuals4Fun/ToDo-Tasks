@@ -1,9 +1,9 @@
 nav {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: white;
 }
 
 nav div {
@@ -50,20 +50,18 @@ nav a:hover svg {
     color: black;
 }
 
-@media screen and (max-width: 681px) {
+@media screen and (max-width: 999px) {
     nav {
         bottom: 0;
         padding: 10px;
-        border-top: 1px solid #e5e7eb;
-        border-radius: 20px 20px 0 0;
+        border-top: 1px solid #D0D0D0;
     }
 }
 
-@media screen and (min-width: 682px) {
+@media screen and (min-width: 1000px) {
     nav {
         top: 0;
         padding: 10px 50px;
-        border-bottom: 1px solid #e5e7eb;
-        border-radius: 0 0 20px 20px;
+        border-bottom: 1px solid #D0D0D0;
     }
 }

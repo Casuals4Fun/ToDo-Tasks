@@ -1,0 +1,17 @@
+#add_task {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  height: calc(100svh - 50px);
+  background-color: rgba(0, 0, 0, 0.9);
+  display: grid;
+  place-items: center;
+}
+
+@media screen and (min-width: 1000px) {
+  #add_task {
+    top: 50px;
+  }
+}

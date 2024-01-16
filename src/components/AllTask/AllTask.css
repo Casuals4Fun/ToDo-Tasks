@@ -1,0 +1,227 @@
+#all__task {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+}
+
+.all__task__container {
+    position: relative;
+}
+
+.all__task__header {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-bottom: 1px solid #D0D0D0;
+}
+
+.task__btn {
+    background-color: #D0D0D0;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.task__btn:hover,
+.task__btn.active {
+    background-color: black;
+    color: white;
+}
+
+.task__btn.filter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.select__filter__top {
+    position: absolute;
+    bottom: -70px;
+    right: 0;
+    background-color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #D0D0D0;
+    border-right: 1px solid #D0D0D0;
+    border-bottom: 1px solid #D0D0D0;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+
+.select__filter__top button {
+    padding: 7px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+.select__filter__top button:first-child {
+    border-bottom: 1px solid #D0D0D0;
+}
+
+.select__filter__top button:hover {
+    background-color: white;
+}
+
+.filter__btn {
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    padding: 17.5px;
+    display: grid;
+    place-items: center;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.filter__btn.active {
+    border-radius: 50px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.select__filter__bottom {
+    display: flex;
+    gap: 10px;
+}
+
+.select__filter__bottom button {
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.select__filter__bottom button:hover {
+    text-decoration: underline;
+}
+
+.filter__header {
+    background-color: white;
+    padding: 10px 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+.filter__header button {
+    background-color: rgb(243 244 246);
+    padding: 7px 15px;
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    transition: all 150ms ease-in-out;
+}
+
+.filter__header button:hover {
+    background-color: #D0D0D0;
+}
+
+.filter__header button h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+.tasks__container {
+    padding-bottom: 60px;
+    display: grid;
+}
+
+.task__card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(243 244 246);
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.task__text {
+    flex: 1;
+    padding: 20px 10px;
+}
+
+.task__operation {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #e5e7eb;
+}
+
+.task__status {
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+}
+
+.task__status.Incomplete {
+    color: #FFA500;
+}
+
+.task__status.Complete {
+    color: #00D100;
+}
+
+.task__operation__btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.task__operation__btn button {
+    width: 33px;
+    height: 33px;
+    display: grid;
+    place-items: center;
+    background-color: #D0D0D0;
+    color: black;
+    border-radius: 50%;
+    transition: all 150ms ease-in-out;
+}
+
+.task__operation__btn button:hover {
+    background-color: black;
+    color: white;
+}
+
+@media screen and (min-width: 801px) {
+    .tasks__container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 999px) {
+
+    .task__btn.filter,
+    .select__filter__top {
+        display: none;
+    }
+
+    .tasks__container {
+        gap: 20px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    #all__task {
+        top: 50px;
+    }
+
+    .filter__btn,
+    .filter__btn.active {
+        display: none;
+    }
+}

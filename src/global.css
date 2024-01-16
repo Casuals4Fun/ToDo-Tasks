@@ -2,13 +2,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+}
+
 a {
   color: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .container {
@@ -16,19 +25,19 @@ a {
 }
 
 .task__container {
-  max-width: 600px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
 }
 
-@media screen and (max-width: 681px) {
+@media screen and (max-width: 999px) {
   .task__container {
-    padding: 10px;
+    padding: 0 10px;
   }
 }
 
-@media screen and (min-width: 682px) {
+@media screen and (min-width: 1000px) {
   .task__container {
-    padding: 70px 10px 20px 10px;
+    padding-top: 50px;
   }
 }

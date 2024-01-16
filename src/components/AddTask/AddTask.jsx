@@ -1,10 +1,21 @@
 import './AddTask.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleAddTaskModal } from '../../state/taskReducer';
 
 const AddTask = () => {
+    const dispatch = useDispatch();
+    const { openAddTaskModal } = useSelector(state => state.tasks);
+    if (!openAddTaskModal) return;
+
     return (
-        <section id="add_task">
-            Add Task Section
-        </section>
+        <div id="add_task">
+            <button onClick={() => {
+                document.body.style.overflow = "auto"
+                dispatch(toggleAddTaskModal());
+            }}>
+                Close Add Task
+            </button>
+        </div>
     )
 }
 

@@ -1,6 +1,9 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const initialState = {
+    openAddTaskModal: false,
+    openFilter: false,
+    filter: "",
     tasks: [],
 };
 
@@ -8,6 +11,17 @@ export const taskSlice = createSlice({
     name: "tasks",
     initialState,
     reducers: {
+        toggleAddTaskModal: (state) => {
+            state.openFilter = false;
+            state.openAddTaskModal = !state.openAddTaskModal;
+        },
+        toggleFilter: (state) => {
+            state.openFilter = !state.openFilter
+        },
+        handleFilter: (state, action) => {
+            state.openFilter = false;
+            state.filter = action.payload
+        },
         addTask: (state, action) => {
             const task = {
                 id: nanoid(),
@@ -23,5 +37,12 @@ export const taskSlice = createSlice({
     }
 });
 
-export const { addTask, removeTask } = taskSlice.actions;
+export const {
+    toggleAddTaskModal,
+    toggleFilter,
+    handleFilter,
+    addTask,
+    removeTask
+} = taskSlice.actions;
+
 export default taskSlice.reducer;
