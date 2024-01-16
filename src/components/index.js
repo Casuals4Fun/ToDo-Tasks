@@ -1,5 +1,5 @@
 import Navbar from "./Navbar/Navbar";
-import AddTask from "./AddTask/AddTask";
+import TaskModal from "./TaskModal/TaskModal";
 import AllTask from "./AllTask/AllTask";
 
-export { Navbar, AddTask, AllTask };
+export { Navbar, TaskModal, AllTask };

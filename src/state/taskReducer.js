@@ -7,11 +7,7 @@ const initialTasks = storedTasks ? JSON.parse(storedTasks) : [
     { id: 3, text: 'This is third task.', status: 'Incomplete' },
     { id: 4, text: 'This is fourth task.', status: 'Incomplete' },
     { id: 5, text: 'This is fifth task.', status: 'Complete' },
-    { id: 6, text: 'This is sixth task.', status: 'Incomplete' },
-    { id: 7, text: 'This is seventh task.', status: 'Complete' },
-    { id: 8, text: 'This is eigth task.', status: 'Incomplete' },
-    { id: 9, text: 'This is ninth task.', status: 'Complete' },
-    { id: 10, text: 'This is tenth task.', status: 'Incomplete' }
+    // { id: 6, text: 'This is sixth task.', status: 'Complete' }
 ];
 
 const initialState = {
@@ -33,8 +29,11 @@ export const taskSlice = createSlice({
             state.openFilter = !state.openFilter
         },
         handleFilter: (state, action) => {
+            const newFilter = action.payload;
             state.openFilter = false;
-            state.filter = action.payload;
+            if (state.filter === newFilter) state.filter = "";
+            else state.filter = newFilter;
+            state.tasks = state.filter ? initialTasks.filter(task => task.status === state.filter) : initialTasks;
         },
         addTask: (state, action) => {
             const task = {

@@ -1,8 +1,8 @@
-import './AddTask.css';
+import './TaskModal.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAddTaskModal } from '../../state/taskReducer';
 
-const AddTask = () => {
+const TaskModal = () => {
     const dispatch = useDispatch();
     const { openAddTaskModal } = useSelector(state => state.tasks);
     if (!openAddTaskModal) return;
@@ -19,4 +19,4 @@ const AddTask = () => {
     )
 }
 
-export default AddTask
+export default TaskModal
