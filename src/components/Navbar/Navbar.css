@@ -54,7 +54,7 @@ nav a:hover svg {
     nav {
         bottom: 0;
         padding: 10px;
-        border-top: 1px solid #D0D0D0;
+        border-top: 1px solid #e5e7eb;
     }
 }
 
@@ -62,6 +62,6 @@ nav a:hover svg {
     nav {
         top: 0;
         padding: 10px 50px;
-        border-bottom: 1px solid #D0D0D0;
+        border-bottom: 1px solid #e5e7eb;
     }
 }

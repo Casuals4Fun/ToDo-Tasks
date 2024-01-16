@@ -86,19 +86,30 @@ const TaskHeader = () => {
             <div
                 title='Filter Tasks'
                 className={`filter__btn ${openFilter && "active"}`}
+                onClick={e => {
+                    e.stopPropagation();
+                    dispatch(toggleFilter());
+                }}
             >
                 {openFilter && (
                     <div className='select__filter__bottom'>
-                        <button title='Filter Complete Tasks' onClick={() => dispatch(handleFilter('Complete'))}>
+                        <button title='Filter Complete Tasks' onClick={e => {
+                            e.stopPropagation();
+                            dispatch(handleFilter('Complete'));
+                        }}>
                             Complete
                         </button>
-                        <button title='Filter Incomplete Tasks' onClick={() => dispatch(handleFilter('Incomplete'))}>
+                        <button title='Filter Incomplete Tasks' onClick={e => {
+                            e.stopPropagation();
+                            dispatch(handleFilter('Incomplete'));
+                        }}>
                             Incomplete
                         </button>
                     </div>
                 )}
-                <FaFilter size={20} onClick={() => dispatch(toggleFilter())} />
+                <FaFilter size={20} />
             </div>
+
         </>
     )
 }

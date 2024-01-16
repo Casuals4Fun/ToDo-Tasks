@@ -18,7 +18,7 @@
 }
 
 .task__btn {
-    background-color: #D0D0D0;
+    background-color: #e5e7eb;
     color: black;
     border: none;
     border-radius: 20px;
@@ -86,7 +86,7 @@
 .filter__btn.active {
     border-radius: 50px;
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -185,7 +185,7 @@
     height: 33px;
     display: grid;
     place-items: center;
-    background-color: #D0D0D0;
+    background-color: #e5e7eb;
     color: black;
     border-radius: 50%;
     transition: all 150ms ease-in-out;
