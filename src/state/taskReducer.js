@@ -1,28 +1,29 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
+import formatDate from '../utils/formatData';
 
 const storedTasks = localStorage.getItem('tasks');
-const initialTasks = storedTasks ? JSON.parse(storedTasks) : [
-    { id: 1, text: 'This is first task.', status: 'Complete' },
-    { id: 2, text: 'This is second task.', status: 'Complete' },
-    { id: 3, text: 'This is third task.', status: 'Incomplete' },
-    { id: 4, text: 'This is fourth task.', status: 'Incomplete' },
-    { id: 5, text: 'This is fifth task.', status: 'Complete' },
-    // { id: 6, text: 'This is sixth task.', status: 'Complete' }
-];
+const initialTasks = storedTasks ? JSON.parse(storedTasks) : [];
 
 const initialState = {
     openAddTaskModal: false,
     openFilter: false,
     filter: "",
-    tasks: initialTasks
+    tasks: initialTasks,
+    tempTask: {
+        id: "",
+        text: "",
+        status: "",
+        date: ""
+    }
 };
 
 export const taskSlice = createSlice({
     name: "tasks",
     initialState,
     reducers: {
-        toggleAddTaskModal: (state) => {
+        toggleAddTaskModal: (state, action) => {
             state.openFilter = false;
+            if (action.payload) state.tempTask = action.payload;
             state.openAddTaskModal = !state.openAddTaskModal;
         },
         toggleFilter: (state) => {
@@ -36,20 +37,33 @@ export const taskSlice = createSlice({
             state.tasks = state.filter ? initialTasks.filter(task => task.status === state.filter) : initialTasks;
         },
         addTask: (state, action) => {
+            state.openAddTaskModal = false;
             const task = {
                 id: nanoid(),
                 text: action.payload.text,
-                date: action.payload.date
+                status: action.payload.status,
+                date: formatDate(new Date())
             };
-            state.tasks.push(task);
+            state.tasks = [...state.tasks, task];
+            localStorage.setItem('tasks', JSON.stringify(state.tasks));
+        },
+        editTask: (state, action) => {
+            state.openAddTaskModal = false;
+            const { id, text, status } = action.payload;
+            const editedTasks = state.tasks.map((task) =>
+                task.id === id ? { ...task, text, status, date: formatDate(new Date()) } : task
+            );
+            state.tasks = editedTasks;
+            localStorage.setItem('tasks', JSON.stringify(state.tasks));
+        },
+        removeTask: (state, action) => {
+            const idToRemove = action.payload;
+            state.tasks = state.tasks.filter(task => task.id !== idToRemove);
+            localStorage.setItem('tasks', JSON.stringify(state.tasks));
         },
         setTasks: (state, action) => {
             state.tasks = action.payload;
         },
-        removeTask: (state, action) => {
-            const id = action.payload;
-            state.tasks = state.tasks.filter(task => task.id !== id);
-        }
     }
 });
 
@@ -58,8 +72,9 @@ export const {
     toggleFilter,
     handleFilter,
     addTask,
-    setTasks,
-    removeTask
+    editTask,
+    removeTask,
+    setTasks
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

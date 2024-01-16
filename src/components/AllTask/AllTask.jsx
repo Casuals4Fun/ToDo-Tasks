@@ -49,9 +49,11 @@ const Tasks = () => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        {reversedTasks.map((task, index) => (
+                        {reversedTasks.length > 0 ? reversedTasks.map((task, index) => (
                             <Card task={task} index={index} key={task.id} />
-                        ))}
+                        )) : (
+                            <p>No {filter} tasks yet...</p>
+                        )}
                         {provided.placeholder}
                     </div>
                 )}
