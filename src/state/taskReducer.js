@@ -32,6 +32,7 @@ export const taskSlice = createSlice({
         toggleAddTaskModal: (state, action) => {
             state.openFilter = false;
             if (action.payload) state.tempTask = action.payload;
+            else state.tempTask = {};
             state.openAddTaskModal = !state.openAddTaskModal;
         },
         toggleFilter: (state) => {
@@ -60,6 +61,7 @@ export const taskSlice = createSlice({
                 state.tasks[index] = { ...state.tasks[index], text, status, date: formatDate(new Date()) };
             }
             localStorage.setItem('tasks', JSON.stringify(state.tasks));
+            state.tempTask = {};
         },
         removeTask: (state, action) => {
             const idToRemove = action.payload;

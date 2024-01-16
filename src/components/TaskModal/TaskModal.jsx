@@ -13,9 +13,11 @@ const TaskModal = () => {
 
     const handleAddTask = (e) => {
         e.preventDefault();
+        document.body.style.overflow = "auto"
 
         if (!tempTask.id) dispatch(addTask({ text, status }));
         else dispatch(editTask({ id: tempTask.id, text, status }));
+
         setText("");
         setStatus("Incomplete");
     }
@@ -26,7 +28,7 @@ const TaskModal = () => {
                 <div className='modal__header'>
                     <h2>Create new task</h2>
                     <button onClick={() => {
-                        document.body.style.overflow = "auto"
+                        document.body.style.overflow = "auto";
                         dispatch(toggleAddTaskModal());
                     }}>
                         <IoReturnUpBackOutline size={25} />
@@ -61,7 +63,7 @@ const TaskModal = () => {
                         />
                     </div>
                     <button type="submit">
-                        Add Task
+                        {!tempTask.id ? "Add Task" : "Update Task"}
                     </button>
                 </form>
             </div>
