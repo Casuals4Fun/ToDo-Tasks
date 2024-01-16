@@ -1,14 +1,22 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
-import formatDate from '../utils/formatData';
+import formatDate from '../utils/formatDate';
 
-const storedTasks = localStorage.getItem('tasks');
-const initialTasks = storedTasks ? JSON.parse(storedTasks) : [];
+// Attempt to load tasks from localStorage, or set to an empty array if none exist
+const loadTasks = () => {
+    try {
+        const serializedTasks = localStorage.getItem('tasks');
+        if (serializedTasks === null) return [];
+        return JSON.parse(serializedTasks);
+    } catch (err) {
+        return [];
+    }
+};
 
 const initialState = {
     openAddTaskModal: false,
     openFilter: false,
     filter: "",
-    tasks: initialTasks,
+    tasks: loadTasks(),
     tempTask: {
         id: "",
         text: "",
@@ -27,14 +35,11 @@ export const taskSlice = createSlice({
             state.openAddTaskModal = !state.openAddTaskModal;
         },
         toggleFilter: (state) => {
-            state.openFilter = !state.openFilter
+            state.openFilter = !state.openFilter;
         },
         handleFilter: (state, action) => {
-            const newFilter = action.payload;
             state.openFilter = false;
-            if (state.filter === newFilter) state.filter = "";
-            else state.filter = newFilter;
-            state.tasks = state.filter ? initialTasks.filter(task => task.status === state.filter) : initialTasks;
+            state.filter = action.payload;
         },
         addTask: (state, action) => {
             state.openAddTaskModal = false;
@@ -44,16 +49,16 @@ export const taskSlice = createSlice({
                 status: action.payload.status,
                 date: formatDate(new Date())
             };
-            state.tasks = [...state.tasks, task];
+            state.tasks.push(task);
             localStorage.setItem('tasks', JSON.stringify(state.tasks));
         },
         editTask: (state, action) => {
             state.openAddTaskModal = false;
             const { id, text, status } = action.payload;
-            const editedTasks = state.tasks.map((task) =>
-                task.id === id ? { ...task, text, status, date: formatDate(new Date()) } : task
-            );
-            state.tasks = editedTasks;
+            const index = state.tasks.findIndex(task => task.id === id);
+            if (index !== -1) {
+                state.tasks[index] = { ...state.tasks[index], text, status, date: formatDate(new Date()) };
+            }
             localStorage.setItem('tasks', JSON.stringify(state.tasks));
         },
         removeTask: (state, action) => {
@@ -63,7 +68,7 @@ export const taskSlice = createSlice({
         },
         setTasks: (state, action) => {
             state.tasks = action.payload;
-        },
+        }
     }
 });
 

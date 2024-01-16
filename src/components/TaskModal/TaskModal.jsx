@@ -3,22 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addTask, editTask, toggleAddTaskModal } from '../../state/taskReducer';
 import { IoReturnUpBackOutline } from "react-icons/io5";
 import { useState } from 'react';
-import formatDate from '../../utils/formatData';
 
 const TaskModal = () => {
     const dispatch = useDispatch();
-    const { openAddTaskModal, tempTask } = useSelector(state => state.tasks);
+    const { tempTask } = useSelector(state => state.tasks);
 
     const [text, setText] = useState(!tempTask.text ? "" : tempTask.text);
     const [status, setStatus] = useState(!tempTask.status ? "Incomplete" : tempTask.status);
-
-    if (!openAddTaskModal) return;
 
     const handleAddTask = (e) => {
         e.preventDefault();
 
         if (!tempTask.id) dispatch(addTask({ text, status }));
         else dispatch(editTask({ id: tempTask.id, text, status }));
+        setText("");
+        setStatus("Incomplete");
     }
 
     return (
@@ -72,9 +71,9 @@ const TaskModal = () => {
 
 const RadioButton = ({ name, id, value, onChange, checked, text }) => {
     return (
-        <label htmlFor={id} className='radio-label'>
+        <label htmlFor={id} className='radio__label'>
             <input
-                className='radio-input'
+                className='radio__input'
                 type='radio'
                 name={name}
                 id={id}
@@ -82,8 +81,8 @@ const RadioButton = ({ name, id, value, onChange, checked, text }) => {
                 onChange={onChange}
                 checked={checked}
             />
-            <span className='custom-radio' />
-            <span className='radio-text'>{text}</span>
+            <span className='custom__radio' />
+            <span className='radio__text'>{text}</span>
         </label>
     )
 }

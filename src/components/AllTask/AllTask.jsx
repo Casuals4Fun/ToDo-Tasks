@@ -37,7 +37,9 @@ const Tasks = () => {
             localStorage.setItem('tasks', JSON.stringify(newTasks));
         }
     };
+
     const reversedTasks = [...tasks].reverse();
+    const visibleTasks = filter ? reversedTasks.filter(task => task.status === filter) : reversedTasks;
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>
@@ -49,7 +51,7 @@ const Tasks = () => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
-                        {reversedTasks.length > 0 ? reversedTasks.map((task, index) => (
+                        {visibleTasks.length > 0 ? visibleTasks.map((task, index) => (
                             <Card task={task} index={index} key={task.id} />
                         )) : (
                             <p>No {filter} tasks yet...</p>
@@ -132,7 +134,6 @@ const TaskHeader = () => {
                 )}
                 <FaFilter size={20} />
             </div>
-
         </>
     )
 }
