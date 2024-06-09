@@ -1,7 +1,6 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 import formatDate from '../utils/formatDate';
 
-// Attempt to load tasks from localStorage, or set to an empty array if none exist
 const loadTasks = () => {
     try {
         const serializedTasks = localStorage.getItem('tasks');

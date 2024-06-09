@@ -73,7 +73,10 @@ const TaskHeader = () => {
             <section id="all__task">
                 <div className='all__task__container'>
                     <div className='all__task__header'>
-                        <h2>All Tasks</h2>
+                        <h2>
+                            <span>All Tasks</span>
+                            <span>ToDo Tasks</span>
+                        </h2>
                         <div style={{ position: 'relative', display: 'flex', gap: '5px' }}>
                             <button className={`task__btn ${openAddTaskModal && "active"}`} onClick={() => {
                                 document.body.style.overflow = "hidden";

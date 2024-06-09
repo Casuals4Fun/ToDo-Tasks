@@ -17,6 +17,10 @@
     border-bottom: 1px solid #D0D0D0;
 }
 
+.all__task__header h2 span:first-child {
+    display: none;
+}
+
 .task__btn {
     background-color: #e5e7eb;
     color: black;
@@ -71,7 +75,8 @@
 
 .filter__btn {
     position: fixed;
-    bottom: 60px;
+    /* bottom: 60px; */
+    bottom: 10px;
     right: 10px;
     padding: 17.5px;
     display: grid;
@@ -143,7 +148,8 @@
 }
 
 .tasks__container {
-    padding-bottom: 125px;
+    /* padding-bottom: 125px; */
+    padding-bottom: 75px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -216,6 +222,14 @@
 }
 
 @media screen and (min-width: 700px) {
+    .all__task__header h2 span:first-child {
+        display: block;
+    }
+
+    .all__task__header h2 span:last-child {
+        display: none;
+    }
+
     #all__task {
         top: 50px;
     }
