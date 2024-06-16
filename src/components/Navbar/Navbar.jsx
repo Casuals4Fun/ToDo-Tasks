@@ -1,5 +1,5 @@
 import './Navbar.css'
-import { FaGithub } from "react-icons/fa";
+import { IoLogoGooglePlaystore } from "react-icons/io5";
 
 const Navbar = () => {
     return (
@@ -8,9 +8,9 @@ const Navbar = () => {
                 <h1>
                     <span>T</span>ask <span>T</span>racker
                 </h1>
-                <a href='https://github.com/Shubham-Lal/React-Task-Tracker' target='_blank' rel='noopener noreferrer'>
-                    <p>Source code</p>
-                    <FaGithub size={25} />
+                <a href='https://play.google.com/store/apps/details?id=com.casuals4fun.todotasks' target='_blank' rel='noopener noreferrer'>
+                    <p>Download</p>
+                    <IoLogoGooglePlaystore size={25} />
                 </a>
             </div>
         </nav>
